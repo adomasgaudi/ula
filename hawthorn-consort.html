@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hawthorn Consort — Medieval &amp; Renaissance Music</title>
+<meta name="description" content="The Hawthorn Consort — medieval and Renaissance music for voice and period instruments. Available for concerts, festivals and private events.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f2417;
+  --ink-2:#163020;
+  --ink-3:#1f3d2a;
+  --cream:#ece2cf;
+  --cream-dim:#b3a587;
+  --cream-faint:#8a7f6b;
+  --gold:#c8a85c;
+  --gold-deep:#9a7c3e;
+  --oxblood:#9a4039;
+  --line:rgba(200,168,92,.20);
+  --line-soft:rgba(200,168,92,.10);
+  --photo:url("basilisk.jpg");
+  --serif:"Fraunces",Georgia,serif;
+  --body:"EB Garamond",Georgia,serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--cream);
+  font-family:var(--body);
+  font-size:19px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* grain overlay */
+body::after{
+  content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+.label{
+  font-family:var(--body);
+  font-size:13px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;
+}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.04;letter-spacing:-.01em}
+.serif-it{font-style:italic}
+
+/* ---------- NAV ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .5s var(--ease),border-color .5s var(--ease),backdrop-filter .5s;
+  border-bottom:1px solid transparent;
+}
+header.scrolled{
+  background:rgba(15,36,23,.86);
+  backdrop-filter:blur(12px) saturate(1.2);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:84px}
+.brand{display:flex;align-items:center;gap:14px;font-family:var(--serif);font-size:20px;letter-spacing:.02em}
+.brand .mark{
+  width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;
+  display:grid;place-items:center;color:var(--gold);font-size:15px;letter-spacing:.05em;
+  flex:0 0 auto;transition:.4s var(--ease);
+}
+.brand:hover .mark{background:var(--gold);color:var(--ink);transform:rotate(-8deg)}
+.brand b{font-weight:500}
+nav{display:flex;align-items:center;gap:32px}
+nav ul{display:flex;gap:38px;list-style:none}
+nav a{
+  font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim);
+  position:relative;padding:4px 0;transition:color .3s;
+}
+nav a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--gold);transition:width .35s var(--ease)}
+nav a:hover{color:var(--cream)}
+nav a:hover::after{width:100%}
+.langs{position:relative;flex:0 0 auto}
+.lang-toggle{background:none;border:1px solid var(--line);cursor:pointer;font-family:var(--body);
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim);
+  padding:8px 13px;display:flex;align-items:center;gap:8px;transition:.3s var(--ease)}
+.lang-toggle:hover{color:var(--cream);border-color:var(--gold)}
+.lang-toggle .caret{font-size:9px;color:var(--gold);transition:transform .35s var(--ease)}
+.langs.open .lang-toggle .caret{transform:rotate(180deg)}
+.lang-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:152px;
+  background:rgba(15,36,23,.97);backdrop-filter:blur(12px) saturate(1.2);
+  border:1px solid var(--line);padding:6px;display:flex;flex-direction:column;gap:2px;z-index:120;
+  opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s}
+.langs.open .lang-menu{opacity:1;visibility:visible;transform:none}
+.lang-menu button{background:none;border:0;cursor:pointer;font-family:var(--body);text-align:left;
+  font-size:14px;letter-spacing:.04em;color:var(--cream-dim);padding:9px 12px;transition:.25s var(--ease)}
+.lang-menu button:hover{color:var(--cream);background:var(--ink-3)}
+.lang-menu button.on{color:var(--gold)}
+.burger{display:none;background:none;border:0;cursor:pointer;width:34px;height:24px;position:relative}
+.burger span{position:absolute;left:0;height:1.5px;width:100%;background:var(--cream);transition:.35s var(--ease)}
+.burger span:nth-child(1){top:2px}
+.burger span:nth-child(2){top:11px}
+.burger span:nth-child(3){top:20px}
+body.menu-open .burger span:nth-child(1){top:11px;transform:rotate(45deg)}
+body.menu-open .burger span:nth-child(2){opacity:0}
+body.menu-open .burger span:nth-child(3){top:11px;transform:rotate(-45deg)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:84px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;width:100%}
+.hero-copy{max-width:560px}
+.hero-eyebrow{margin-bottom:30px;opacity:0;transform:translateY(18px);animation:rise .9s var(--ease) .15s forwards}
+.hero h1{
+  font-size:clamp(54px,8.2vw,116px);line-height:.92;letter-spacing:-.025em;font-weight:400;
+}
+.hero h1 .a{display:block;overflow:hidden}
+.hero h1 .a span{display:block;transform:translateY(110%);animation:rise .95s var(--ease) forwards}
+.hero h1 .a:nth-child(1) span{animation-delay:.28s}
+.hero h1 .a:nth-child(2) span{animation-delay:.40s;font-style:italic;color:var(--gold)}
+.hero h1 .a:nth-child(3) span{animation-delay:.52s}
+.hero-sub{
+  margin-top:34px;font-size:21px;color:var(--cream-dim);max-width:430px;line-height:1.55;
+  opacity:0;transform:translateY(18px);animation:rise .9s var(--ease) .72s forwards;
+}
+.hero-cta{margin-top:42px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;
+  opacity:0;transform:translateY(18px);animation:rise .9s var(--ease) .86s forwards}
+.btn{
+  font-family:var(--body);font-size:14px;letter-spacing:.18em;text-transform:uppercase;
+  padding:15px 30px;border:1px solid var(--gold);color:var(--gold);cursor:pointer;
+  background:none;transition:.4s var(--ease);position:relative;overflow:hidden;
+}
+.btn span{position:relative;z-index:1;transition:color .4s var(--ease)}
+.btn::before{content:"";position:absolute;inset:0;background:var(--gold);transform:translateY(101%);transition:transform .4s var(--ease)}
+.btn:hover::before{transform:translateY(0)}
+.btn:hover span{color:var(--ink)}
+.btn.ghost{border-color:var(--line)}
+.btn.ghost span{color:var(--cream-dim)}
+.btn.ghost:hover span{color:var(--ink)}
+
+.hero-photo{position:relative;aspect-ratio:1/1;max-height:84vh;justify-self:end;width:100%;
+  opacity:0;animation:fadephoto 1.4s var(--ease) .35s forwards}
+.hero-photo .img{
+  position:absolute;inset:0;background:var(--photo) center/cover no-repeat;
+  filter:sepia(.12) contrast(1.05) saturate(1.05);
+}
+.hero-photo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(15,36,23,.15),rgba(15,36,23,0) 28%,rgba(15,36,23,.05) 70%,rgba(15,36,23,.55)),
+             radial-gradient(120% 80% at 50% 30%,transparent 55%,rgba(15,36,23,.4));
+  mix-blend-mode:multiply;
+}
+.hero-photo .frame{position:absolute;inset:14px;border:1px solid rgba(200,168,92,.35);pointer-events:none;z-index:2}
+.hero-photo .cap{position:absolute;left:26px;bottom:24px;z-index:3;font-size:12px;letter-spacing:.22em;
+  text-transform:uppercase;color:rgba(236,226,207,.78)}
+
+@keyframes rise{to{transform:translateY(0);opacity:1}}
+@keyframes fadephoto{to{opacity:1}}
+
+/* branch divider */
+.branch{display:block;margin:0 auto;color:var(--gold-deep);opacity:.7}
+
+/* ---------- SECTIONS ---------- */
+section{position:relative}
+.sec-head{display:flex;align-items:baseline;gap:24px;margin-bottom:56px}
+.sec-head .num{font-family:var(--serif);font-style:italic;color:var(--gold-deep);font-size:20px}
+.sec-head h2{font-size:clamp(34px,5vw,60px)}
+.pad{padding:120px 0}
+.rule{height:1px;background:var(--line);width:100%}
+
+/* ETHOS */
+.ethos{background:var(--ink-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.ethos .grid{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:start}
+.ethos .lead{font-family:var(--serif);font-size:clamp(26px,3.2vw,40px);line-height:1.22;font-weight:300}
+.ethos .lead em{font-style:italic;color:var(--gold)}
+.ethos p{color:var(--cream-dim);margin-bottom:22px}
+.ethos p:last-child{margin-bottom:0}
+.stats{display:flex;gap:48px;margin-top:48px;flex-wrap:wrap}
+.stat .n{font-family:var(--serif);font-size:46px;color:var(--gold);line-height:1}
+.stat .t{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-faint);margin-top:8px}
+
+/* MUSICIANS */
+.musicians .roster{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.m{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:34px 28px 38px;position:relative;transition:background .5s var(--ease)}
+.m:nth-child(4n){border-right:0}
+.m:hover{background:var(--ink-2)}
+.m .idx{font-family:var(--serif);font-style:italic;color:var(--gold-deep);font-size:16px}
+.m h3{font-size:27px;margin:18px 0 6px}
+.m .inst{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.m p{font-size:16px;color:var(--cream-dim);line-height:1.6}
+.m .mph{position:relative;aspect-ratio:4/5;margin-bottom:24px;overflow:hidden;
+  border:1px solid var(--line)}
+.m .mph img{width:100%;height:100%;object-fit:cover;object-position:center 22%;
+  filter:grayscale(1) sepia(.18) contrast(1.04) brightness(.96);transition:.6s var(--ease)}
+.m:hover .mph img{filter:grayscale(0) sepia(.1) contrast(1.05);transform:scale(1.04)}
+.m .mph::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(15,36,23,0) 60%,rgba(15,36,23,.4));pointer-events:none}
+.m .mph.voice{display:grid;place-items:center;background:var(--ink-2);
+  background-image:radial-gradient(120% 90% at 50% 30%,rgba(200,168,92,.10),transparent 70%)}
+.m .mph.voice span{font-size:54px;color:var(--gold-deep);transition:.6s var(--ease)}
+.m:hover .mph.voice span{color:var(--gold);transform:scale(1.1)}
+.m .mph.voice::after{display:none}
+.m .orn{position:absolute;top:30px;right:26px;color:var(--line);font-size:22px;transition:.5s var(--ease)}
+.m:hover .orn{color:var(--gold);transform:rotate(180deg)}
+
+/* PROGRAMMES */
+.programmes{background:var(--ink-2);border-top:1px solid var(--line-soft)}
+.prog-feature{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center;margin-bottom:80px}
+.prog-fig{position:relative;overflow:hidden;border:1px solid var(--line);aspect-ratio:1000/1341}
+.prog-fig img{width:100%;height:100%;object-fit:cover;transition:.8s var(--ease);
+  filter:contrast(1.04) saturate(1.06) brightness(.96)}
+.prog-fig:hover img{transform:scale(1.04)}
+.prog-fig figcaption{position:absolute;left:18px;bottom:14px;z-index:2;font-size:12px;
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(236,226,207,.82)}
+.prog-fig::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(15,36,23,0) 60%,rgba(15,36,23,.5));pointer-events:none}
+.prog-intro .prog-title{font-size:clamp(40px,5.5vw,68px);margin:14px 0 4px}
+.prog-intro .prog-tag{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:20px;margin-bottom:26px}
+.prog-intro p{color:var(--cream-dim);margin-bottom:18px}
+.prog-intro p em{font-style:italic;color:var(--cream)}
+.prog-meta{display:flex;gap:30px;margin-top:30px;flex-wrap:wrap}
+.prog-meta span{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+  border:1px solid var(--line);padding:9px 16px}
+.setlist{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+.mvt h4{font-family:var(--serif);font-size:15px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;padding-bottom:14px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+.mvt ol{list-style:none}
+.mvt li{padding:13px 0;border-bottom:1px solid var(--line-soft);display:flex;gap:12px;align-items:baseline}
+.mvt li:last-child{border-bottom:0}
+.mvt .no{font-family:var(--serif);font-style:italic;color:var(--gold-deep);font-size:14px;flex:0 0 auto;width:20px}
+.mvt .pc{font-size:15px;line-height:1.45}
+.mvt .pc .tt{font-style:italic;color:var(--cream)}
+.mvt .pc .cm{display:block;font-size:13px;color:var(--cream-faint);margin-top:2px}
+.mvt .pc .dn{color:var(--cream-faint);font-size:13px;font-variant-numeric:tabular-nums}
+@media(max-width:1000px){.prog-feature{grid-template-columns:1fr;gap:40px}.setlist{grid-template-columns:1fr;gap:40px}}
+
+/* LISTEN */
+.listen .player{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:center}
+.disc{position:relative;aspect-ratio:1/1;max-width:380px}
+.disc .ring{position:absolute;inset:0;border-radius:50%;border:1px solid var(--line);
+  background:radial-gradient(circle at 50% 50%,var(--ink-3) 0 30%,var(--ink-2) 31% 100%)}
+.disc .ring.r2{inset:26px;border-color:var(--line-soft)}
+.disc .ring.r3{inset:52px}
+.disc .hub{position:absolute;inset:42%;border-radius:50%;background:var(--gold);
+  display:grid;place-items:center;color:var(--ink);box-shadow:0 0 0 10px rgba(200,168,92,.12)}
+.disc.spin .rot{animation:spin 9s linear infinite}
+.disc .rot{position:absolute;inset:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tracks{list-style:none}
+.track{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;
+  padding:18px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:.35s var(--ease)}
+.track:hover{padding-left:12px}
+.track .play{width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;
+  display:grid;place-items:center;color:var(--gold);flex:0 0 auto;transition:.35s var(--ease)}
+.track:hover .play,.track.playing .play{background:var(--gold);color:var(--ink)}
+.track .tt{font-family:var(--serif);font-size:21px}
+.track .tsub{font-size:14px;color:var(--cream-faint);letter-spacing:.04em}
+.track .dur{color:var(--cream-faint);font-size:15px;font-variant-numeric:tabular-nums}
+.bars{display:none;gap:3px;align-items:flex-end;height:18px}
+.track.playing .bars{display:flex}
+.track.playing .dur{display:none}
+.bars i{width:3px;background:var(--gold);animation:eq .9s ease-in-out infinite}
+.bars i:nth-child(2){animation-delay:.2s}.bars i:nth-child(3){animation-delay:.4s}.bars i:nth-child(4){animation-delay:.1s}
+@keyframes eq{0%,100%{height:5px}50%{height:18px}}
+
+/* CALENDAR */
+.calendar{background:var(--ink-2);border-top:1px solid var(--line-soft)}
+.gig{display:grid;grid-template-columns:140px 1fr auto;gap:36px;align-items:center;
+  padding:30px 0;border-top:1px solid var(--line);transition:.4s var(--ease)}
+.gigs .gig:last-child{border-bottom:1px solid var(--line)}
+.gig:hover{background:var(--ink-3);padding-left:16px}
+.gig .date{font-family:var(--serif);line-height:1}
+.gig .date .d{font-size:38px;color:var(--gold)}
+.gig .date .my{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-faint);margin-top:6px}
+.gig .where h3{font-size:24px;margin-bottom:5px}
+.gig .where p{font-size:15px;color:var(--cream-dim)}
+.gig .tk{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+  border:1px solid var(--line);padding:11px 20px;transition:.35s var(--ease);white-space:nowrap}
+.gig .tk:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.gig.past{opacity:.42}
+.gig.past .tk{border:0;color:var(--cream-faint);padding-right:0;pointer-events:none}
+
+/* CONTACT */
+.contact .grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:start}
+.contact h2{font-size:clamp(40px,6vw,80px);line-height:.98;margin-bottom:30px}
+.contact h2 em{font-style:italic;color:var(--gold)}
+.contact .blurb{color:var(--cream-dim);max-width:480px;margin-bottom:40px}
+.contact .big-mail{font-family:var(--serif);font-size:clamp(24px,3.2vw,40px);color:var(--cream);
+  border-bottom:1px solid var(--line);padding-bottom:12px;display:inline-block;transition:.4s var(--ease)}
+.contact .big-mail:hover{color:var(--gold);border-color:var(--gold)}
+.card{border:1px solid var(--line);padding:38px}
+.card .row{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--line-soft)}
+.card .row:last-child{border-bottom:0}
+.card .k{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-faint)}
+.card .v{color:var(--cream);text-align:right}
+.card .v a:hover{color:var(--gold)}
+.socials{display:flex;gap:14px;margin-top:26px}
+.socials a{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;
+  color:var(--cream-dim);transition:.35s var(--ease)}
+.socials a:hover{background:var(--gold);color:var(--ink);border-color:var(--gold);transform:translateY(-3px)}
+
+/* FOOTER */
+footer{padding:60px 0 40px;border-top:1px solid var(--line)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.foot .fbrand{font-family:var(--serif);font-size:22px}
+.foot .fbrand em{font-style:italic;color:var(--gold)}
+.foot small{color:var(--cream-faint);font-size:14px;letter-spacing:.04em}
+.toplink{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);transition:.3s}
+.toplink:hover{color:var(--gold)}
+.ver{display:block;text-align:center;margin-top:26px;font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:rgba(236,226,207,.10);transition:color .4s var(--ease)}
+.ver:hover{color:rgba(236,226,207,.34)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:1000px){
+  .hero .wrap{display:flex;flex-direction:column;gap:0}
+  .hero-photo{display:block;order:-1;justify-self:start;width:100%;max-width:460px;
+    max-height:none;aspect-ratio:1/1;margin:0 0 44px}
+  .hero{min-height:auto;padding:150px 0 90px}
+  .ethos .grid,.listen .player,.contact .grid{grid-template-columns:1fr;gap:50px}
+  .musicians .roster{grid-template-columns:repeat(2,1fr)}
+  .m:nth-child(2n){border-right:0}
+}
+@media(max-width:760px){
+  .wrap{padding:0 24px}
+  body{font-size:18px}
+  nav ul{position:fixed;inset:84px 0 auto 0;flex-direction:column;gap:0;background:rgba(15,36,23,.97);
+    backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+    transform:translateY(-130%);transition:transform .5s var(--ease);padding:10px 0}
+  body.menu-open nav ul{transform:none}
+  nav li{border-bottom:1px solid var(--line-soft)}
+  nav a{display:block;padding:20px 24px;font-size:15px;letter-spacing:.18em}
+  nav a::after{display:none}
+  .burger{display:block}
+  .pad{padding:84px 0}
+  .musicians .roster{grid-template-columns:1fr}
+  .m{border-right:0}
+  .gig{grid-template-columns:1fr;gap:14px;text-align:left}
+  .gig .date{display:flex;align-items:baseline;gap:12px}
+  .gig .date .my{margin-top:0}
+  .stats{gap:34px}
+  .hero h1{font-size:clamp(48px,14vw,80px)}
+  .hero .wrap{display:flex;flex-direction:column}
+  .hero-photo{display:block;order:-1;width:100%;max-height:none;
+    aspect-ratio:1/1;margin:0 0 40px}
+}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="brand"><span class="mark">HC</span><span>The&nbsp;<b>Basilisk</b></a>
+    <nav>
+      <ul id="menu">
+        <li><a href="#ethos" data-i18n="nav.ensemble">Ensemble</a></li>
+        <li><a href="#musicians" data-i18n="nav.musicians">Musicians</a></li>
+        <li><a href="#programmes" data-i18n="nav.programme">Programme</a></li>
+        <li><a href="#listen" data-i18n="nav.listen">Listen</a></li>
+        <li><a href="#calendar" data-i18n="nav.calendar">Calendar</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="langs" id="langs">
+        <button type="button" class="lang-toggle" id="langToggle" aria-haspopup="true" aria-expanded="false"><span id="langCur">EN</span><span class="caret">&#9662;</span></button>
+        <div class="lang-menu" id="langMenu" role="menu">
+          <button type="button" data-lang="en" class="on" role="menuitem">English</button>
+          <button type="button" data-lang="fr" role="menuitem">Fran&ccedil;ais</button>
+          <button type="button" data-lang="it" role="menuitem">Italiano</button>
+          <button type="button" data-lang="de" role="menuitem">Deutsch</button>
+        </div>
+      </div>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="hero-eyebrow label" data-i18n="hero.eyebrow">Medieval &amp; Renaissance &middot; est. MMXIX</div>
+      <h1>
+        <span class="a"><span>The Basilisk</span></span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero.sub">Songs and dances of the late Middle Ages, performed on voice, gittern, recorder and Gothic harp — music made for candlelight and stone.</p>
+      <div class="hero-cta">
+        <a href="#calendar" class="btn"><span data-i18n="hero.cta1">Upcoming concerts</span></a>
+        <a href="#contact" class="btn ghost"><span data-i18n="hero.cta2">Book the consort</span></a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="img"></div>
+      <div class="frame"></div>
+      <div class="cap" data-i18n="hero.cap">Basilisk &middot; Bestiary, c. 13th century</div>
+    </div>
+  </div>
+</section>
+
+<!-- ETHOS -->
+<section class="ethos pad" id="ethos">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="num">I</span><h2 data-i18n="eth.h2">The Ensemble</h2></div>
+    <div class="grid">
+      <p class="lead rv" data-i18n="eth.lead">To marry rigorous historical awareness with <em>creative, narrative-driven programming</em> — crafting concerts that interlace music, history, and storytelling.</p>
+      <div>
+        <p class="rv d1" data-i18n="eth.p1">Formed at the Schola Cantorum Basiliensis, Ensemble Basilisk unites musicians drawn to the expressive potential of medieval music and its contemporary resonance. Their work combines historically informed performance with a spirit of experimentation, exploring the unique colours and textures of instruments such as the bray harp, clavicymbalum, organetto, recorder, bowed vielle and voice.</p>
+        <p class="rv d2" data-i18n="eth.p2">Each project invites the listener into a world where sound becomes both research and invention, where precision meets imagination, and the past is re-heard through a living, poetic lens.</p>
+        <p class="rv d3" data-i18n="eth.p3">The ensemble&rsquo;s namesake, the mythical Basilisk, captures this duality: sinuous, vibrant, and unpredictable — a symbol of transformation and intensity. Rooted in the spirit of the <em>Mundus Inversus</em>, where the sacred encounters the grotesque and beauty emerges from contrast, Basilisk reimagines early music as a space of curiosity, vitality, and presence.</p>
+        <div class="stats rv d4">
+          <div class="stat"><div class="n">Basel</div><div class="t" data-i18n="eth.s2">Schola Cantorum roots</div></div>
+          <div class="stat"><div class="n">2025</div><div class="t" data-i18n="eth.s3">Debut &middot; Musica Divina, PL</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MUSICIANS -->
+<section class="musicians pad" id="musicians">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="num">II</span><h2 data-i18n="mus.h2">The Musicians</h2></div>
+    <div class="roster">
+      <div class="m rv"><span class="orn">&#10047;</span><div class="mph"><img src="musician-kinder.jpg" alt="Ula Kinder with vielle" loading="lazy"></div><div class="idx">i.</div><h3>Ula Kinder</h3><div class="inst" data-i18n="m1.inst">Vielle &amp; Baroque Violin</div><p data-i18n="m1.bio">A vielle and Baroque violin player performing across the US and Europe — from Boston Early Music Festival to Lucerne, and on Broadway in &lsquo;Farinelli and the King&rsquo;. A graduate of Juilliard and the Royal Academy of Music, now studying with Baptiste Romain at the Schola Cantorum Basiliensis.</p></div>
+      <div class="m rv d1"><span class="orn">&#10047;</span><div class="mph"><img src="musician-scott.jpg" alt="Daniel Scott with recorder" loading="lazy"></div><div class="idx">ii.</div><h3>Daniel Scott</h3><div class="inst" data-i18n="m2.inst">Organetto, Clavicymbalum &amp; Recorder</div><p data-i18n="m2.bio">A recorder and early-keyboard player specialising in medieval, renaissance and contemporary music. First Prize winner at the Royal Overseas League Competition and founding artistic lead of the UK medieval ensemble Rune, currently reading a masters in early keyboards at the Schola Cantorum Basiliensis.</p></div>
+      <div class="m rv d2"><span class="orn">&#10047;</span><div class="mph"><img src="musician-amici.jpg" alt="Michela Amici with harp" loading="lazy"></div><div class="idx">iii.</div><h3>Michela Amici</h3><div class="inst" data-i18n="m3.inst">Bray &amp; Medieval Harp</div><p data-i18n="m3.bio">Studied modern and historical harps at the Rossini Conservatory of Pesaro and the Royal Conservatoire of The Hague before a Specialized Master in Historical Harps at the Schola Cantorum Basiliensis. A sought-after continuo player at festivals from the Dutch Harp Festival to Musica Antica Den Haag.</p></div>
+      <div class="m rv d3"><span class="orn">&#10047;</span><div class="mph"><img src="musician-ivana.jpg" alt="Ivana Sofia Ivanović, voice" loading="lazy"></div><div class="idx">iv.</div><h3>Ivana Sofia Ivanović</h3><div class="inst" data-i18n="m4.inst">Voice &amp; Organetto</div><p data-i18n="m4.bio">A mezzo-soprano trained in Bordeaux, with master&rsquo;s degrees from the Sorbonne and a Master in Medieval and Renaissance vocal performance from the Schola Cantorum Basiliensis. Based in Basel, she founded the professional vocal ensemble KIMA.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMMES -->
+<section class="programmes pad" id="programmes">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="num">III</span><h2 data-i18n="prog.h2">Programme</h2></div>
+    <div class="prog-feature rv">
+      <figure class="prog-fig"><img src="illum-large.jpg" alt="Illuminated medieval manuscript leaf" loading="lazy"><figcaption data-i18n="prog.figcap">Illuminated leaf &middot; 14th c.</figcaption></figure>
+      <div class="prog-intro">
+        <div class="label" data-i18n="prog.label">Debut programme &middot; premiered at Musica Divina, PL</div>
+        <h3 class="prog-title serif-it">Mundus Inversus</h3>
+        <p class="prog-tag" data-i18n="prog.tag">The world turned upside down</p>
+        <p data-i18n="prog.p1">The <em>Mundus Inversus</em> is a medieval image of subversion and insight — a mirror held up to society, where hierarchies collapse, folly unmasks reason, and satire brushes against prayer. This programme explores that inversion through works from the 13th to the 15th centuries, from the Codex Buranus to the Roman de Fauvel, from Machaut to Solage and Ciconia.</p>
+        <p data-i18n="prog.p2">Devotion and derision, the grotesque and the mystical, intertwine in a journey where the learned order of the Ars Nova gradually unravels under the breath of improvisation, dance and popular song — a theatre of shadows where the sacred meets the grotesque, and beauty emerges from disorder.</p>
+        <div class="prog-meta"><span data-i18n="prog.meta1">16 works</span><span data-i18n="prog.meta2">c. 60 minutes</span><span data-i18n="prog.meta3">13th&ndash;15th century</span></div>
+      </div>
+    </div>
+    <div class="setlist rv">
+      <div class="mvt">
+        <h4 data-i18n="prog.mv1">I &middot; Order and its Vanity</h4>
+        <ol>
+          <li><span class="no">1</span><span class="pc"><span class="tt">O cruor sanguinis</span><span class="cm">Hildegard von Bingen (1098&ndash;1179)</span></span><span class="dn">3&prime;00</span></li>
+          <li><span class="no">2</span><span class="pc"><span class="tt">Amours me fait d&eacute;sirer</span><span class="cm">Guillaume de Machaut (c. 1300&ndash;1377)</span></span><span class="dn">2&prime;30</span></li>
+          <li><span class="no">3</span><span class="pc"><span class="tt">Contemplar le gran cose</span><span class="cm">Francesco Landini (c. 1335&ndash;1397)</span></span><span class="dn">3&prime;30</span></li>
+          <li><span class="no">4</span><span class="pc"><span class="tt">Je vivroie liement</span><span class="cm">Guillaume de Machaut</span></span><span class="dn">3&prime;00</span></li>
+          <li><span class="no">5</span><span class="pc"><span class="tt">O cieco mondo</span><span class="cm">Jacopo da Bologna (fl. 1340&ndash;1360)</span></span><span class="dn">4&prime;</span></li>
+        </ol>
+      </div>
+      <div class="mvt">
+        <h4 data-i18n="prog.mv2">II &middot; The World Upside Down</h4>
+        <ol>
+          <li><span class="no">6</span><span class="pc"><span class="tt">Florebat olim studium</span><span class="cm" data-i18n="prog.c6">Codex Buranus (13th c.) &middot; improvisation</span></span><span class="dn">3&prime;</span></li>
+          <li><span class="no">7</span><span class="pc"><span class="tt">Mundus a mundicia</span><span class="cm" data-i18n="prog.c7">Anon., Roman de Fauvel (14th c.)</span></span><span class="dn">2&prime;</span></li>
+          <li><span class="no">8</span><span class="pc"><span class="tt">Cosa non &egrave; ch&rsquo;a s&eacute; tanto mi tiri</span><span class="cm" data-i18n="prog.c8">Anonymous (14th c.)</span></span><span class="dn">3&prime;30</span></li>
+          <li><span class="no">9</span><span class="pc"><span class="tt">De ce que fol pense</span><span class="cm" data-i18n="prog.c9">Pierre des Molins (fl. mid-14th c.)</span></span><span class="dn">5&prime;</span></li>
+          <li><span class="no">10</span><span class="pc"><span class="tt">Pluseurs gens voy</span><span class="cm">Solage (fl. 1350&ndash;1403)</span></span><span class="dn">5&prime;</span></li>
+          <li><span class="no">11</span><span class="pc"><span class="tt">O livoris feritas</span><span class="cm">Guillaume de Machaut</span></span><span class="dn">3&prime;</span></li>
+        </ol>
+      </div>
+      <div class="mvt">
+        <h4 data-i18n="prog.mv3">III &middot; Towards Light or Madness</h4>
+        <ol>
+          <li><span class="no">12</span><span class="pc"><span class="tt">Es f&uuml;gt sich</span><span class="cm">Oswald von Wolkenstein (c. 1377&ndash;1445)</span></span><span class="dn">7&prime;</span></li>
+          <li><span class="no">13</span><span class="pc"><span class="tt">Una Panthera</span><span class="cm">Johannes Ciconia (c. 1370&ndash;1412)</span></span><span class="dn">5&prime;</span></li>
+          <li><span class="no">14</span><span class="pc"><span class="tt">Kyrie Cunctipotens Genitor Deus</span><span class="cm" data-i18n="prog.c14">Anon., Faenza Codex (15th c.)</span></span><span class="dn">5&prime;</span></li>
+          <li><span class="no">15</span><span class="pc"><span class="tt">Ad mortem festinamus</span><span class="cm" data-i18n="prog.c15">Anon., Llibre Vermell de Montserrat (14th c.)</span></span><span class="dn">4&prime;</span></li>
+          <li><span class="no">16</span><span class="pc"><span class="tt">Stella splendens in monte</span><span class="cm" data-i18n="prog.c16">Anon., Llibre Vermell de Montserrat (14th c.)</span></span><span class="dn">3&prime;</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTEN -->
+<section class="listen pad" id="listen">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="num">IV</span><h2 data-i18n="lst.h2">Listen</h2></div>
+    <div class="player">
+      <div class="disc rv" id="disc">
+        <div class="rot"><div class="ring"></div><div class="ring r2"></div><div class="ring r3"></div></div>
+        <div class="hub">&#9834;</div>
+      </div>
+      <ul class="tracks rv d1" id="tracks">
+        <li class="track" data-dur="4:12"><span class="play">&#9654;</span><div><div class="tt serif-it">Douce dame jolie</div><div class="tsub">Guillaume de Machaut</div></div><span class="dur">4:12</span><span class="bars"><i></i><i></i><i></i><i></i></span></li>
+        <li class="track" data-dur="3:38"><span class="play">&#9654;</span><div><div class="tt serif-it">Santa Mar&iacute;a, strela do d&iacute;a</div><div class="tsub">Cantigas de Santa Mar&iacute;a, CSM 100</div></div><span class="dur">3:38</span><span class="bars"><i></i><i></i><i></i><i></i></span></li>
+        <li class="track" data-dur="5:02"><span class="play">&#9654;</span><div><div class="tt serif-it">O frondens virga</div><div class="tsub">Hildegard von Bingen</div></div><span class="dur">5:02</span><span class="bars"><i></i><i></i><i></i><i></i></span></li>
+        <li class="track" data-dur="2:54"><span class="play">&#9654;</span><div><div class="tt serif-it">Edi beo thu, hevene quene</div><div class="tsub" data-i18n="lst.sub4">Anonymous English, 13th c.</div></div><span class="dur">2:54</span><span class="bars"><i></i><i></i><i></i><i></i></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section class="calendar pad" id="calendar">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="num">V</span><h2 data-i18n="cal.h2">Calendar</h2></div>
+    <div class="gigs rv">
+      <div class="gig"><div class="date"><div class="d">14</div><div class="my" data-i18n="cal.my1">Jun &middot; 2026</div></div><div class="where"><h3>York Early Music Festival</h3><p>The Garden of Earthly Delight &middot; National Centre for Early Music, York</p></div><a href="#contact" class="tk" data-i18n="cal.tickets">Tickets</a></div>
+      <div class="gig"><div class="date"><div class="d">02</div><div class="my" data-i18n="cal.my2">Jul &middot; 2026</div></div><div class="where"><h3>Vilnius Sacred Music Days</h3><p data-i18n="cal.p2">Cantigas de Santa Mar&iacute;a &middot; St. Casimir&rsquo;s Church, Vilnius</p></div><a href="#contact" class="tk" data-i18n="cal.tickets">Tickets</a></div>
+      <div class="gig"><div class="date"><div class="d">19</div><div class="my" data-i18n="cal.my3">Sep &middot; 2026</div></div><div class="where"><h3>Utrecht Festival Oude Muziek</h3><p>Vox Feminae &middot; Pieterskerk, Utrecht</p></div><a href="#contact" class="tk" data-i18n="cal.tickets">Tickets</a></div>
+      <div class="gig past"><div class="date"><div class="d">21</div><div class="my" data-i18n="cal.my4">Mar &middot; 2026</div></div><div class="where"><h3>Wigmore Hall</h3><p data-i18n="cal.p4">Under the Greenwood &middot; London</p></div><span class="tk" data-i18n="cal.past">Past</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact pad" id="contact">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <h2 class="rv" data-i18n="con.h2">Invite the<br><em>consort</em></h2>
+        <p class="blurb rv d1" data-i18n="con.blurb">The Hawthorn Consort is available for concert series, festivals, liturgical music, private events and weddings, with programmes tailored to your space and occasion. We perform as a quartet or in smaller forces.</p>
+        <a href="mailto:hello@hawthornconsort.com" class="big-mail rv d2">hello@hawthornconsort.com</a>
+      </div>
+      <div class="card rv d2">
+        <div class="row"><span class="k" data-i18n="con.k1">Management</span><span class="v">Larkspur Artists</span></div>
+        <div class="row"><span class="k" data-i18n="con.k2">Telephone</span><span class="v"><a href="tel:+441234567890">+44 1234 567 890</a></span></div>
+        <div class="row"><span class="k" data-i18n="con.k3">Based in</span><span class="v">Oxford &amp; Vilnius</span></div>
+        <div class="row"><span class="k" data-i18n="con.k4">Touring</span><span class="v" data-i18n="con.v4">Europe &amp; UK</span></div>
+        <div class="socials">
+          <a href="#" aria-label="Instagram" title="Instagram">&#9823;</a>
+          <a href="#" aria-label="YouTube" title="YouTube">&#9654;</a>
+          <a href="#" aria-label="Bandcamp" title="Bandcamp">&#9834;</a>
+          <a href="mailto:hello@hawthornconsort.com" aria-label="Email" title="Email">&#9993;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="fbrand">The <em>Hawthorn</em> Consort</div>
+    <small data-i18n="ft.small">&copy; 2026 The Hawthorn Consort &middot; Medieval &amp; Renaissance music</small>
+    <a href="#top" class="toplink" data-i18n="ft.top">Back to top &uarr;</a>
+  </div>
+  <small class="ver">v1.0.0</small>
+</footer>
+
+<script>
+// header scrolled state
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40)},{passive:true});
+
+// mobile menu
+const burger=document.getElementById('burger');
+burger.addEventListener('click',()=>document.body.classList.toggle('menu-open'));
+document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu-open')));
+
+// reveal on scroll
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.16});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// pseudo player (demo only — wire to real embeds)
+const disc=document.getElementById('disc');
+document.querySelectorAll('.track').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const on=t.classList.contains('playing');
+    document.querySelectorAll('.track').forEach(x=>{x.classList.remove('playing');x.querySelector('.play').innerHTML='&#9654;'});
+    if(!on){t.classList.add('playing');t.querySelector('.play').innerHTML='&#10074;&#10074;';disc.classList.add('spin')}
+    else{disc.classList.remove('spin')}
+  });
+});
+
+// tiny parallax on hero photo
+const photo=document.querySelector('.hero-photo .img');
+if(photo){addEventListener('scroll',()=>{const y=Math.min(scrollY,700);photo.style.transform='translateY('+(y*0.06)+'px) scale(1.04)'},{passive:true})}
+
+// ---------- i18n (EN / FR / IT / DE) ----------
+// English is the markup baseline (captured on load); proper names, work titles,
+// composers, dates and durations are intentionally left untranslated.
+const I18N={
+  fr:{
+    "nav.ensemble":"Ensemble","nav.musicians":"Musiciens","nav.programme":"Programme","nav.listen":"Écouter","nav.calendar":"Agenda","nav.contact":"Contact",
+    "hero.eyebrow":"Musique médiévale &amp; Renaissance &middot; fond. MMXIX",
+    "hero.sub":"Chants et danses de la fin du Moyen Âge, portés par la voix, la guiterne, la flûte à bec et la harpe gothique — une musique née pour la pierre et la lumière des cierges.",
+    "hero.cta1":"Concerts à venir","hero.cta2":"Réserver l’ensemble",
+    "hero.cap":"Basilisk &middot; bestiaire, v. XIIIᵉ siècle",
+    "eth.h2":"L’Ensemble",
+    "eth.lead":"Unir une rigueur historique exigeante à <em>une programmation créative, portée par le récit</em> — concevoir des concerts où s’entrelacent musique, histoire et narration.",
+    "eth.p1":"Né à la Schola Cantorum Basiliensis, l’Ensemble Basilisk réunit des musiciens sensibles au potentiel expressif de la musique médiévale et à sa résonance contemporaine. Leur travail allie une interprétation historiquement informée à un esprit d’expérimentation, explorant les couleurs et les textures singulières d’instruments tels que la harpe à harpions, le clavicymbalum, l’organetto, la flûte à bec, la vièle à archet et la voix.",
+    "eth.p2":"Chaque projet invite l’auditeur dans un monde où le son devient à la fois recherche et invention, où la précision rejoint l’imagination, et où le passé se laisse réentendre à travers un regard vivant et poétique.",
+    "eth.p3":"L’emblème de l’ensemble, le Basilic mythique, incarne cette dualité : sinueux, vibrant et imprévisible — symbole de métamorphose et d’intensité. Enraciné dans l’esprit du <em>Mundus Inversus</em>, où le sacré côtoie le grotesque et où la beauté naît du contraste, Basilisk réinvente la musique ancienne comme un espace de curiosité, de vitalité et de présence.",
+    "eth.s1":"Instruments &amp; voix","eth.s2":"Racines à la Schola Cantorum","eth.s3":"Début &middot; Musica Divina, PL",
+    "mus.h2":"Les Musiciens",
+    "m1.inst":"Vièle &amp; violon baroque",
+    "m1.bio":"Joue de la vièle et du violon baroque sur les scènes des États-Unis et d’Europe — du Boston Early Music Festival à Lucerne, et à Broadway dans « Farinelli and the King ». Après une formation à la Juilliard School et à la Royal Academy of Music, poursuit ses études auprès de Baptiste Romain à la Schola Cantorum Basiliensis.",
+    "m2.inst":"Organetto, clavicymbalum &amp; flûte à bec",
+    "m2.bio":"Joueur de flûte à bec et de claviers anciens, spécialiste des musiques médiévale, Renaissance et contemporaine. Premier Prix du concours de la Royal Overseas League et directeur artistique fondateur de l’ensemble médiéval britannique Rune ; poursuit actuellement un master de claviers anciens à la Schola Cantorum Basiliensis.",
+    "m3.inst":"Harpe à harpions &amp; harpe médiévale",
+    "m3.bio":"A étudié les harpes modernes et historiques au Conservatoire Rossini de Pesaro et au Conservatoire royal de La Haye, avant un master spécialisé en harpes historiques à la Schola Cantorum Basiliensis. Continuiste recherchée, du Dutch Harp Festival à la Musica Antica Den Haag.",
+    "m4.inst":"Voix &amp; organetto",
+    "m4.bio":"Mezzo-soprano formée à Bordeaux, titulaire de masters de la Sorbonne et d’un master de chant médiéval et Renaissance de la Schola Cantorum Basiliensis. Établie à Bâle, elle a fondé l’ensemble vocal professionnel KIMA.",
+    "prog.h2":"Programme","prog.figcap":"Feuillet enluminé &middot; XIVᵉ s.",
+    "prog.label":"Programme inaugural &middot; créé à Musica Divina, PL",
+    "prog.tag":"Le monde renversé",
+    "prog.p1":"Le <em>Mundus Inversus</em> est une image médiévale de subversion et de lucidité — un miroir tendu à la société, où les hiérarchies s’effondrent, où la folie démasque la raison et où la satire effleure la prière. Ce programme explore ce renversement à travers des œuvres du XIIIᵉ au XVᵉ siècle, du Codex Buranus au Roman de Fauvel, de Machaut à Solage et Ciconia.",
+    "prog.p2":"Dévotion et dérision, grotesque et mystique s’entrelacent en un parcours où l’ordre savant de l’Ars Nova se défait peu à peu sous le souffle de l’improvisation, de la danse et du chant populaire — un théâtre d’ombres où le sacré rejoint le grotesque, et où la beauté surgit du désordre.",
+    "prog.meta1":"16 œuvres","prog.meta2":"env. 60 minutes","prog.meta3":"XIIIᵉ–XVᵉ siècle",
+    "prog.mv1":"I &middot; L’ordre et sa vanité","prog.mv2":"II &middot; Le monde renversé","prog.mv3":"III &middot; Vers la lumière ou la folie",
+    "prog.c6":"Codex Buranus (XIIIᵉ s.) &middot; improvisation","prog.c7":"Anon., Roman de Fauvel (XIVᵉ s.)","prog.c8":"Anonyme (XIVᵉ s.)","prog.c9":"Pierre des Molins (actif mil. XIVᵉ s.)","prog.c14":"Anon., Codex de Faenza (XVᵉ s.)","prog.c15":"Anon., Llibre Vermell de Montserrat (XIVᵉ s.)","prog.c16":"Anon., Llibre Vermell de Montserrat (XIVᵉ s.)",
+    "lst.h2":"Écouter","lst.sub4":"Anonyme anglais, XIIIᵉ s.",
+    "cal.h2":"Agenda","cal.my1":"juin &middot; 2026","cal.my2":"juil. &middot; 2026","cal.my3":"sept. &middot; 2026","cal.my4":"mars &middot; 2026",
+    "cal.p2":"Cantigas de Santa María &middot; église Saint-Casimir, Vilnius","cal.p4":"Under the Greenwood &middot; Londres",
+    "cal.tickets":"Billets","cal.past":"Passé",
+    "con.h2":"Invitez<br><em>l’ensemble</em>",
+    "con.blurb":"L’ensemble se produit en séries de concerts, festivals, musique liturgique, événements privés et mariages, avec des programmes pensés pour votre lieu et votre occasion. Nous jouons en quatuor ou en effectif plus restreint.",
+    "con.k1":"Représentation","con.k2":"Téléphone","con.k3":"Basé à","con.k4":"En tournée","con.v4":"Europe &amp; R.-U.",
+    "ft.small":"&copy; 2026 The Hawthorn Consort &middot; Musique médiévale &amp; Renaissance","ft.top":"Haut de page &uarr;"
+  },
+  it:{
+    "nav.ensemble":"Ensemble","nav.musicians":"Musicisti","nav.programme":"Programma","nav.listen":"Ascolta","nav.calendar":"Calendario","nav.contact":"Contatti",
+    "hero.eyebrow":"Musica medievale e rinascimentale &middot; fond. MMXIX",
+    "hero.sub":"Canti e danze del tardo Medioevo, eseguiti con voce, ghiterna, flauto dolce e arpa gotica — una musica pensata per la pietra e il lume di candela.",
+    "hero.cta1":"Prossimi concerti","hero.cta2":"Ingaggia l’ensemble",
+    "hero.cap":"Basilisk &middot; bestiario, c. XIII secolo",
+    "eth.h2":"L’Ensemble",
+    "eth.lead":"Coniugare un rigoroso senso storico con <em>una programmazione creativa, guidata dalla narrazione</em> — concependo concerti in cui musica, storia e racconto si intrecciano.",
+    "eth.p1":"Nato alla Schola Cantorum Basiliensis, l’Ensemble Basilisk riunisce musicisti attratti dal potenziale espressivo della musica medievale e dalla sua risonanza contemporanea. Il loro lavoro unisce un’esecuzione storicamente informata a uno spirito di sperimentazione, esplorando i colori e le trame singolari di strumenti quali l’arpa bray, il clavicymbalum, l’organetto, il flauto dolce, la vielle ad arco e la voce.",
+    "eth.p2":"Ogni progetto invita l’ascoltatore in un mondo in cui il suono si fa ricerca e invenzione insieme, dove la precisione incontra l’immaginazione e il passato torna a farsi udire attraverso uno sguardo vivo e poetico.",
+    "eth.p3":"L’emblema dell’ensemble, il mitico Basilisco, racchiude questa dualità: sinuoso, vibrante e imprevedibile — simbolo di trasformazione e intensità. Radicato nello spirito del <em>Mundus Inversus</em>, dove il sacro incontra il grottesco e la bellezza nasce dal contrasto, Basilisk reimmagina la musica antica come uno spazio di curiosità, vitalità e presenza.",
+    "eth.s1":"Strumenti e voci","eth.s2":"Radici alla Schola Cantorum","eth.s3":"Esordio &middot; Musica Divina, PL",
+    "mus.h2":"I Musicisti",
+    "m1.inst":"Vielle &amp; violino barocco",
+    "m1.bio":"Suona la vielle e il violino barocco sulle scene di Stati Uniti ed Europa — dal Boston Early Music Festival a Lucerna, e a Broadway in « Farinelli and the King ». Dopo gli studi alla Juilliard School e alla Royal Academy of Music, prosegue la propria formazione con Baptiste Romain alla Schola Cantorum Basiliensis.",
+    "m2.inst":"Organetto, clavicymbalum &amp; flauto dolce",
+    "m2.bio":"Flauto dolce e tastiere antiche, specializzato in musica medievale, rinascimentale e contemporanea. Primo Premio al concorso della Royal Overseas League e direttore artistico fondatore dell’ensemble medievale britannico Rune; attualmente frequenta un master in tastiere antiche alla Schola Cantorum Basiliensis.",
+    "m3.inst":"Arpa bray &amp; arpa medievale",
+    "m3.bio":"Ha studiato arpe moderne e storiche al Conservatorio Rossini di Pesaro e al Conservatorio Reale dell’Aia, prima di un master specialistico in arpe storiche alla Schola Cantorum Basiliensis. Apprezzata continuista, dal Dutch Harp Festival alla Musica Antica Den Haag.",
+    "m4.inst":"Voce &amp; organetto",
+    "m4.bio":"Mezzosoprano formatasi a Bordeaux, con master conseguiti alla Sorbona e un master in canto medievale e rinascimentale alla Schola Cantorum Basiliensis. Con sede a Basilea, ha fondato l’ensemble vocale professionale KIMA.",
+    "prog.h2":"Programma","prog.figcap":"Foglio miniato &middot; XIV sec.",
+    "prog.label":"Programma d’esordio &middot; debutto a Musica Divina, PL",
+    "prog.tag":"Il mondo alla rovescia",
+    "prog.p1":"Il <em>Mundus Inversus</em> è un’immagine medievale di sovversione e di rivelazione — uno specchio teso alla società, dove le gerarchie crollano, la follia smaschera la ragione e la satira sfiora la preghiera. Questo programma esplora tale rovesciamento attraverso opere dal XIII al XV secolo, dal Codex Buranus al Roman de Fauvel, da Machaut a Solage e Ciconia.",
+    "prog.p2":"Devozione e derisione, grottesco e mistico si intrecciano in un percorso in cui l’ordine dotto dell’Ars Nova si disfa a poco a poco sotto il soffio dell’improvvisazione, della danza e del canto popolare — un teatro d’ombre dove il sacro incontra il grottesco e la bellezza affiora dal disordine.",
+    "prog.meta1":"16 brani","prog.meta2":"c. 60 minuti","prog.meta3":"XIII–XV secolo",
+    "prog.mv1":"I &middot; L’ordine e la sua vanità","prog.mv2":"II &middot; Il mondo alla rovescia","prog.mv3":"III &middot; Verso la luce o la follia",
+    "prog.c6":"Codex Buranus (XIII sec.) &middot; improvvisazione","prog.c7":"Anon., Roman de Fauvel (XIV sec.)","prog.c8":"Anonimo (XIV sec.)","prog.c9":"Pierre des Molins (attivo metà XIV sec.)","prog.c14":"Anon., Codex Faenza (XV sec.)","prog.c15":"Anon., Llibre Vermell de Montserrat (XIV sec.)","prog.c16":"Anon., Llibre Vermell de Montserrat (XIV sec.)",
+    "lst.h2":"Ascolta","lst.sub4":"Anonimo inglese, XIII sec.",
+    "cal.h2":"Calendario","cal.my1":"giu &middot; 2026","cal.my2":"lug &middot; 2026","cal.my3":"set &middot; 2026","cal.my4":"mar &middot; 2026",
+    "cal.p2":"Cantigas de Santa María &middot; chiesa di San Casimiro, Vilnius","cal.p4":"Under the Greenwood &middot; Londra",
+    "cal.tickets":"Biglietti","cal.past":"Passato",
+    "con.h2":"Invita<br><em>l’ensemble</em>",
+    "con.blurb":"L’ensemble è disponibile per stagioni concertistiche, festival, musica liturgica, eventi privati e matrimoni, con programmi pensati per il vostro spazio e la vostra occasione. Ci esibiamo in quartetto o in organici più ridotti.",
+    "con.k1":"Management","con.k2":"Telefono","con.k3":"Con sede a","con.k4":"In tournée","con.v4":"Europa e Regno Unito",
+    "ft.small":"&copy; 2026 The Hawthorn Consort &middot; Musica medievale e rinascimentale","ft.top":"Torna su &uarr;"
+  },
+  de:{
+    "nav.ensemble":"Ensemble","nav.musicians":"Musiker","nav.programme":"Programm","nav.listen":"Hören","nav.calendar":"Termine","nav.contact":"Kontakt",
+    "hero.eyebrow":"Mittelalter &amp; Renaissance &middot; gegr. MMXIX",
+    "hero.sub":"Lieder und Tänze des späten Mittelalters, gespielt auf Stimme, Gittern, Blockflöte und gotischer Harfe — Musik, geschaffen für Kerzenlicht und Stein.",
+    "hero.cta1":"Kommende Konzerte","hero.cta2":"Ensemble buchen",
+    "hero.cap":"Basilisk &middot; Bestiarium, um 13. Jh.",
+    "eth.h2":"Das Ensemble",
+    "eth.lead":"Strenges historisches Bewusstsein mit <em>einer kreativen, vom Erzählen geleiteten Programmgestaltung</em> verbinden — Konzerte, in denen sich Musik, Geschichte und Erzählung verflechten.",
+    "eth.p1":"An der Schola Cantorum Basiliensis gegründet, vereint das Ensemble Basilisk Musiker, die das Ausdruckspotenzial mittelalterlicher Musik und ihren gegenwärtigen Nachklang erkunden. Ihre Arbeit verbindet historisch informierte Aufführung mit Experimentierfreude und erkundet die eigentümlichen Farben und Texturen von Instrumenten wie der Bray-Harfe, dem Clavicymbalum, dem Organetto, der Blockflöte, der gestrichenen Fidel und der Stimme.",
+    "eth.p2":"Jedes Projekt lädt den Hörer in eine Welt, in der Klang zugleich Forschung und Erfindung wird, in der Präzision auf Vorstellungskraft trifft und die Vergangenheit durch eine lebendige, poetische Linse neu erklingt.",
+    "eth.p3":"Der Namensgeber des Ensembles, der sagenhafte Basilisk, verkörpert diese Doppelnatur: gewunden, lebendig und unberechenbar — ein Sinnbild für Wandlung und Intensität. Im Geist des <em>Mundus Inversus</em> verwurzelt, wo das Heilige dem Grotesken begegnet und Schönheit aus dem Kontrast erwächst, denkt Basilisk die Alte Musik als einen Raum der Neugier, der Lebendigkeit und der Gegenwart neu.",
+    "eth.s1":"Instrumente &amp; Stimmen","eth.s2":"Wurzeln an der Schola Cantorum","eth.s3":"Debüt &middot; Musica Divina, PL",
+    "mus.h2":"Die Musiker",
+    "m1.inst":"Fidel &amp; Barockvioline",
+    "m1.bio":"Spielt Fidel und Barockvioline auf Bühnen in den USA und Europa — vom Boston Early Music Festival bis Luzern und am Broadway in „Farinelli and the King“. Nach dem Studium an der Juilliard School und der Royal Academy of Music folgt derzeit ein Studium bei Baptiste Romain an der Schola Cantorum Basiliensis.",
+    "m2.inst":"Organetto, Clavicymbalum &amp; Blockflöte",
+    "m2.bio":"Blockflöte und historische Tasteninstrumente, spezialisiert auf mittelalterliche, Renaissance- und zeitgenössische Musik. Erster Preis beim Wettbewerb der Royal Overseas League und künstlerischer Gründungsleiter des britischen Mittelalter-Ensembles Rune; studiert derzeit historische Tasteninstrumente im Master an der Schola Cantorum Basiliensis.",
+    "m3.inst":"Bray- &amp; Mittelalterharfe",
+    "m3.bio":"Studierte moderne und historische Harfen am Conservatorio Rossini in Pesaro und am Königlichen Konservatorium Den Haag, vor einem Spezialmaster für historische Harfen an der Schola Cantorum Basiliensis. Gefragte Continuo-Spielerin von Dutch Harp Festival bis Musica Antica Den Haag.",
+    "m4.inst":"Stimme &amp; Organetto",
+    "m4.bio":"In Bordeaux ausgebildete Mezzosopranistin, mit Masterabschlüssen der Sorbonne und einem Master in mittelalterlichem und Renaissance-Gesang der Schola Cantorum Basiliensis. In Basel ansässig, gründete sie das professionelle Vokalensemble KIMA.",
+    "prog.h2":"Programm","prog.figcap":"Illuminiertes Blatt &middot; 14. Jh.",
+    "prog.label":"Debütprogramm &middot; uraufgeführt bei Musica Divina, PL",
+    "prog.tag":"Die verkehrte Welt",
+    "prog.p1":"Der <em>Mundus Inversus</em> ist ein mittelalterliches Bild der Umkehrung und der Erkenntnis — ein der Gesellschaft vorgehaltener Spiegel, in dem Hierarchien zerfallen, die Narrheit die Vernunft entlarvt und die Satire das Gebet streift. Dieses Programm erkundet jene Umkehrung anhand von Werken vom 13. bis zum 15. Jahrhundert, vom Codex Buranus bis zum Roman de Fauvel, von Machaut über Solage bis Ciconia.",
+    "prog.p2":"Andacht und Spott, das Groteske und das Mystische verflechten sich auf einem Weg, auf dem die gelehrte Ordnung der Ars Nova unter dem Hauch von Improvisation, Tanz und volkstümlichem Lied allmählich zerfällt — ein Schattentheater, in dem das Heilige dem Grotesken begegnet und Schönheit aus der Unordnung erwächst.",
+    "prog.meta1":"16 Werke","prog.meta2":"ca. 60 Minuten","prog.meta3":"13.–15. Jahrhundert",
+    "prog.mv1":"I &middot; Die Ordnung und ihre Eitelkeit","prog.mv2":"II &middot; Die verkehrte Welt","prog.mv3":"III &middot; Dem Licht oder dem Wahnsinn entgegen",
+    "prog.c6":"Codex Buranus (13. Jh.) &middot; Improvisation","prog.c7":"Anon., Roman de Fauvel (14. Jh.)","prog.c8":"Anonym (14. Jh.)","prog.c9":"Pierre des Molins (tätig Mitte 14. Jh.)","prog.c14":"Anon., Codex Faenza (15. Jh.)","prog.c15":"Anon., Llibre Vermell de Montserrat (14. Jh.)","prog.c16":"Anon., Llibre Vermell de Montserrat (14. Jh.)",
+    "lst.h2":"Hören","lst.sub4":"Anonym, England, 13. Jh.",
+    "cal.h2":"Termine","cal.my1":"Juni &middot; 2026","cal.my2":"Juli &middot; 2026","cal.my3":"Sept. &middot; 2026","cal.my4":"März &middot; 2026",
+    "cal.p2":"Cantigas de Santa María &middot; St.-Casimir-Kirche, Vilnius","cal.p4":"Under the Greenwood &middot; London",
+    "cal.tickets":"Karten","cal.past":"Vergangen",
+    "con.h2":"Das Ensemble<br><em>einladen</em>",
+    "con.blurb":"Das Ensemble ist für Konzertreihen, Festivals, liturgische Musik, private Anlässe und Hochzeiten verfügbar, mit Programmen, die auf Ihren Raum und Anlass zugeschnitten sind. Wir treten als Quartett oder in kleinerer Besetzung auf.",
+    "con.k1":"Management","con.k2":"Telefon","con.k3":"Sitz in","con.k4":"Auf Tournee","con.v4":"Europa &amp; UK",
+    "ft.small":"&copy; 2026 The Hawthorn Consort &middot; Mittelalter- &amp; Renaissance-Musik","ft.top":"Nach oben &uarr;"
+  }
+};
+
+const i18nNodes=document.querySelectorAll('[data-i18n]');
+i18nNodes.forEach(n=>{n.setAttribute('data-en',n.innerHTML)});
+const langs=document.getElementById('langs');
+const langToggle=document.getElementById('langToggle');
+const langCur=document.getElementById('langCur');
+function closeLangs(){langs.classList.remove('open');langToggle.setAttribute('aria-expanded','false')}
+function applyLang(lang){
+  if(lang!=='fr'&&lang!=='it'&&lang!=='de')lang='en';
+  document.documentElement.lang=lang;
+  const dict=I18N[lang];
+  i18nNodes.forEach(n=>{
+    const k=n.getAttribute('data-i18n');
+    const v=(lang==='en')?n.getAttribute('data-en'):(dict&&dict[k]);
+    n.innerHTML=(v==null||v==='')?n.getAttribute('data-en'):v;
+  });
+  document.querySelectorAll('#langMenu button').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
+  langCur.textContent=lang.toUpperCase();
+  try{localStorage.setItem('lang',lang)}catch(e){}
+}
+langToggle.addEventListener('click',(e)=>{
+  e.stopPropagation();
+  const open=langs.classList.toggle('open');
+  langToggle.setAttribute('aria-expanded',open?'true':'false');
+});
+document.querySelectorAll('#langMenu button').forEach(b=>{
+  b.addEventListener('click',()=>{applyLang(b.dataset.lang);closeLangs()});
+});
+document.addEventListener('click',(e)=>{if(!langs.contains(e.target))closeLangs()});
+document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeLangs()});
+let savedLang='en';
+try{savedLang=localStorage.getItem('lang')||'en'}catch(e){}
+applyLang(savedLang);
+</script>
+</body>
+</html>

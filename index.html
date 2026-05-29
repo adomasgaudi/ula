@@ -309,9 +309,10 @@ footer{padding:60px 0 40px;border-top:1px solid var(--line)}
 
 /* ---------- RESPONSIVE ---------- */
 @media(max-width:1000px){
-  .hero .wrap{grid-template-columns:1fr;gap:0}
-  .hero-photo{display:none}
-  .hero{min-height:auto;padding:160px 0 90px}
+  .hero .wrap{display:flex;flex-direction:column;gap:0}
+  .hero-photo{display:block;order:-1;justify-self:start;width:100%;max-width:460px;
+    max-height:none;aspect-ratio:1/1;margin:0 0 44px}
+  .hero{min-height:auto;padding:150px 0 90px}
   .ethos .grid,.listen .player,.contact .grid{grid-template-columns:1fr;gap:50px}
   .musicians .roster{grid-template-columns:repeat(2,1fr)}
   .m:nth-child(2n){border-right:0}
@@ -380,7 +381,6 @@ footer{padding:60px 0 40px;border-top:1px solid var(--line)}
     <div class="hero-photo">
       <div class="img"></div>
       <div class="frame"></div>
-      <div class="cap">Basilisk &middot; Bestiary, c. 13th century</div>
     </div>
   </div>
 </section>
@@ -392,11 +392,9 @@ footer{padding:60px 0 40px;border-top:1px solid var(--line)}
     <div class="grid">
       <p class="lead rv">To marry rigorous historical awareness with <em>creative, narrative-driven programming</em> — crafting concerts that interlace music, history, and storytelling.</p>
       <div>
-        <p class="rv d1">Formed at the Schola Cantorum Basiliensis, Ensemble Basilisk unites musicians drawn to the expressive potential of medieval music and its contemporary resonance. Their work combines historically informed performance with a spirit of experimentation, exploring the unique colours and textures of instruments such as the bray harp, clavicymbalum, organetto, recorder, bowed vielle and voice.</p>
-        <p class="rv d2">Each project invites the listener into a world where sound becomes both research and invention, where precision meets imagination, and the past is re-heard through a living, poetic lens.</p>
-        <p class="rv d3">The ensemble&rsquo;s namesake, the mythical Basilisk, captures this duality: sinuous, vibrant, and unpredictable — a symbol of transformation and intensity. Rooted in the spirit of the <em>Mundus Inversus</em>, where the sacred encounters the grotesque and beauty emerges from contrast, Basilisk reimagines early music as a space of curiosity, vitality, and presence.</p>
+        <p class="rv d1">Formed at the Schola Cantorum Basiliensis, Ensemble Basilisk unites musicians drawn to medieval music and its contemporary resonance. Their work pairs historically informed performance with a spirit of experimentation, exploring instruments such as the bray harp, clavicymbalum, organetto, recorder, bowed vielle and voice.</p>
+        <p class="rv d2">Their namesake, the mythical Basilisk, captures this duality — a symbol of transformation rooted in the <em>Mundus Inversus</em>, where the sacred meets the grotesque and beauty emerges from contrast. Each project re-hears the past through a living, poetic lens, reimagining early music as a space of curiosity, vitality and presence.</p>
         <div class="stats rv d4">
-          <div class="stat"><div class="n">6</div><div class="t">Instruments &amp; voices</div></div>
           <div class="stat"><div class="n">Basel</div><div class="t">Schola Cantorum roots</div></div>
           <div class="stat"><div class="n">2025</div><div class="t">Debut &middot; Musica Divina, PL</div></div>
         </div>
