@@ -191,16 +191,34 @@ section{position:relative}
 
 /* PROGRAMMES */
 .programmes{background:var(--ink-2);border-top:1px solid var(--line-soft)}
-.prog-art{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:64px}
-.prog-art figure{position:relative;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3}
-.prog-art img{width:100%;height:100%;object-fit:cover;transition:.7s var(--ease);
-  filter:contrast(1.04) saturate(1.05) brightness(.96)}
-.prog-art figure:hover img{transform:scale(1.05)}
-.prog-art figure::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(15,36,23,0) 55%,rgba(15,36,23,.5));pointer-events:none}
-.prog-art figcaption{position:absolute;left:18px;bottom:14px;z-index:2;font-size:12px;
+.prog-feature{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center;margin-bottom:80px}
+.prog-fig{position:relative;overflow:hidden;border:1px solid var(--line);aspect-ratio:1000/1341}
+.prog-fig img{width:100%;height:100%;object-fit:cover;transition:.8s var(--ease);
+  filter:contrast(1.04) saturate(1.06) brightness(.96)}
+.prog-fig:hover img{transform:scale(1.04)}
+.prog-fig figcaption{position:absolute;left:18px;bottom:14px;z-index:2;font-size:12px;
   letter-spacing:.2em;text-transform:uppercase;color:rgba(236,226,207,.82)}
-@media(max-width:760px){.prog-art{grid-template-columns:1fr;gap:16px}}
+.prog-fig::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(15,36,23,0) 60%,rgba(15,36,23,.5));pointer-events:none}
+.prog-intro .prog-title{font-size:clamp(40px,5.5vw,68px);margin:14px 0 4px}
+.prog-intro .prog-tag{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:20px;margin-bottom:26px}
+.prog-intro p{color:var(--cream-dim);margin-bottom:18px}
+.prog-intro p em{font-style:italic;color:var(--cream)}
+.prog-meta{display:flex;gap:30px;margin-top:30px;flex-wrap:wrap}
+.prog-meta span{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+  border:1px solid var(--line);padding:9px 16px}
+.setlist{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+.mvt h4{font-family:var(--serif);font-size:15px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;padding-bottom:14px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+.mvt ol{list-style:none}
+.mvt li{padding:13px 0;border-bottom:1px solid var(--line-soft);display:flex;gap:12px;align-items:baseline}
+.mvt li:last-child{border-bottom:0}
+.mvt .no{font-family:var(--serif);font-style:italic;color:var(--gold-deep);font-size:14px;flex:0 0 auto;width:20px}
+.mvt .pc{font-size:15px;line-height:1.45}
+.mvt .pc .tt{font-style:italic;color:var(--cream)}
+.mvt .pc .cm{display:block;font-size:13px;color:var(--cream-faint);margin-top:2px}
+.mvt .pc .dn{color:var(--cream-faint);font-size:13px;font-variant-numeric:tabular-nums}
+@media(max-width:1000px){.prog-feature{grid-template-columns:1fr;gap:40px}.setlist{grid-template-columns:1fr;gap:40px}}
 .prog{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center;
   padding:38px 0;border-top:1px solid var(--line);cursor:default;transition:.5s var(--ease)}
 .prog:last-child{border-bottom:1px solid var(--line)}
@@ -335,7 +353,7 @@ footer{padding:60px 0 40px;border-top:1px solid var(--line)}
       <ul id="menu">
         <li><a href="#ethos">Ensemble</a></li>
         <li><a href="#musicians">Musicians</a></li>
-        <li><a href="#programmes">Programmes</a></li>
+        <li><a href="#programmes">Programme</a></li>
         <li><a href="#listen">Listen</a></li>
         <li><a href="#calendar">Calendar</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -395,7 +413,7 @@ footer{padding:60px 0 40px;border-top:1px solid var(--line)}
       <div class="m rv"><span class="orn">&#10047;</span><div class="mph"><img src="musician-kinder.jpg" alt="Ula Kinder with vielle" loading="lazy"></div><div class="idx">i.</div><h3>Ula Kinder</h3><div class="inst">Vielle &amp; Baroque Violin</div><p>A vielle and Baroque violin player performing across the US and Europe — from Boston Early Music Festival to Lucerne, and on Broadway in &lsquo;Farinelli and the King&rsquo;. A graduate of Juilliard and the Royal Academy of Music, now studying with Baptiste Romain at the Schola Cantorum Basiliensis.</p></div>
       <div class="m rv d1"><span class="orn">&#10047;</span><div class="mph"><img src="musician-scott.jpg" alt="Daniel Scott with recorder" loading="lazy"></div><div class="idx">ii.</div><h3>Daniel Scott</h3><div class="inst">Organetto, Clavicymbalum &amp; Recorder</div><p>A recorder and early-keyboard player specialising in medieval, renaissance and contemporary music. First Prize winner at the Royal Overseas League Competition and founding artistic lead of the UK medieval ensemble Rune, currently reading a masters in early keyboards at the Schola Cantorum Basiliensis.</p></div>
       <div class="m rv d2"><span class="orn">&#10047;</span><div class="mph"><img src="musician-amici.jpg" alt="Michela Amici with harp" loading="lazy"></div><div class="idx">iii.</div><h3>Michela Amici</h3><div class="inst">Bray &amp; Medieval Harp</div><p>Studied modern and historical harps at the Rossini Conservatory of Pesaro and the Royal Conservatoire of The Hague before a Specialized Master in Historical Harps at the Schola Cantorum Basiliensis. A sought-after continuo player at festivals from the Dutch Harp Festival to Musica Antica Den Haag.</p></div>
-      <div class="m rv d3"><span class="orn">&#10047;</span><div class="mph voice"><span>&#9834;</span></div><div class="idx">iv.</div><h3>Ivana Sofia Ivanović</h3><div class="inst">Voice &amp; Organetto</div><p>A mezzo-soprano trained in Bordeaux, with master&rsquo;s degrees from the Sorbonne and a Master in Medieval and Renaissance vocal performance from the Schola Cantorum Basiliensis. Based in Basel, she founded the professional vocal ensemble KIMA.</p></div>
+      <div class="m rv d3"><span class="orn">&#10047;</span><div class="mph"><img src="musician-ivana.jpg" alt="Ivana Sofia Ivanović, voice" loading="lazy"></div><div class="idx">iv.</div><h3>Ivana Sofia Ivanović</h3><div class="inst">Voice &amp; Organetto</div><p>A mezzo-soprano trained in Bordeaux, with master&rsquo;s degrees from the Sorbonne and a Master in Medieval and Renaissance vocal performance from the Schola Cantorum Basiliensis. Based in Basel, she founded the professional vocal ensemble KIMA.</p></div>
     </div>
   </div>
 </section>
@@ -403,16 +421,50 @@ footer{padding:60px 0 40px;border-top:1px solid var(--line)}
 <!-- PROGRAMMES -->
 <section class="programmes pad" id="programmes">
   <div class="wrap">
-    <div class="sec-head rv"><span class="num">III</span><h2>Programmes</h2></div>
-    <div class="prog-art rv">
-      <figure><img src="illum-musicians.jpg" alt="Medieval musicians at play" loading="lazy"><figcaption>Minstrels &middot; medieval manuscript</figcaption></figure>
-      <figure><img src="illum-large.jpg" alt="Illuminated manuscript page" loading="lazy"><figcaption>Illuminated leaf &middot; Mundus Inversus</figcaption></figure>
+    <div class="sec-head rv"><span class="num">III</span><h2>Programme</h2></div>
+    <div class="prog-feature rv">
+      <figure class="prog-fig"><img src="illum-large.jpg" alt="Illuminated medieval manuscript leaf" loading="lazy"><figcaption>Illuminated leaf &middot; 14th c.</figcaption></figure>
+      <div class="prog-intro">
+        <div class="label">Debut programme &middot; premiered at Musica Divina, PL</div>
+        <h3 class="prog-title serif-it">Mundus Inversus</h3>
+        <p class="prog-tag">The world turned upside down</p>
+        <p>The <em>Mundus Inversus</em> is a medieval image of subversion and insight — a mirror held up to society, where hierarchies collapse, folly unmasks reason, and satire brushes against prayer. This programme explores that inversion through works from the 13th to the 15th centuries, from the Codex Buranus to the Roman de Fauvel, from Machaut to Solage and Ciconia.</p>
+        <p>Devotion and derision, the grotesque and the mystical, intertwine in a journey where the learned order of the Ars Nova gradually unravels under the breath of improvisation, dance and popular song — a theatre of shadows where the sacred meets the grotesque, and beauty emerges from disorder.</p>
+        <div class="prog-meta"><span>16 works</span><span>c. 60 minutes</span><span>13th&ndash;15th century</span></div>
+      </div>
     </div>
-    <div class="rv">
-      <div class="prog"><span class="pn">i</span><div class="pt serif-it">The Garden of Earthly Delight</div><div class="pd">French &amp; Italian song of the Ars Nova — Machaut, Landini and the courtly love lyric.</div></div>
-      <div class="prog"><span class="pn">ii</span><div class="pt serif-it">Cantigas de Santa Mar&iacute;a</div><div class="pd">Devotional song and dance from the court of Alfonso X of Castile.</div></div>
-      <div class="prog"><span class="pn">iii</span><div class="pt serif-it">Under the Greenwood</div><div class="pd">English carols, ballads and estampies, 1300&ndash;1550.</div></div>
-      <div class="prog"><span class="pn">iv</span><div class="pt serif-it">Vox Feminae</div><div class="pd">The visionary music of Hildegard von Bingen and the medieval mystics.</div></div>
+    <div class="setlist rv">
+      <div class="mvt">
+        <h4>I &middot; Order and its Vanity</h4>
+        <ol>
+          <li><span class="no">1</span><span class="pc"><span class="tt">O cruor sanguinis</span><span class="cm">Hildegard von Bingen (1098&ndash;1179)</span></span><span class="dn">3&prime;00</span></li>
+          <li><span class="no">2</span><span class="pc"><span class="tt">Amours me fait d&eacute;sirer</span><span class="cm">Guillaume de Machaut (c. 1300&ndash;1377)</span></span><span class="dn">2&prime;30</span></li>
+          <li><span class="no">3</span><span class="pc"><span class="tt">Contemplar le gran cose</span><span class="cm">Francesco Landini (c. 1335&ndash;1397)</span></span><span class="dn">3&prime;30</span></li>
+          <li><span class="no">4</span><span class="pc"><span class="tt">Je vivroie liement</span><span class="cm">Guillaume de Machaut</span></span><span class="dn">3&prime;00</span></li>
+          <li><span class="no">5</span><span class="pc"><span class="tt">O cieco mondo</span><span class="cm">Jacopo da Bologna (fl. 1340&ndash;1360)</span></span><span class="dn">4&prime;</span></li>
+        </ol>
+      </div>
+      <div class="mvt">
+        <h4>II &middot; The World Upside Down</h4>
+        <ol>
+          <li><span class="no">6</span><span class="pc"><span class="tt">Florebat olim studium</span><span class="cm">Codex Buranus (13th c.) &middot; improvisation</span></span><span class="dn">3&prime;</span></li>
+          <li><span class="no">7</span><span class="pc"><span class="tt">Mundus a mundicia</span><span class="cm">Anon., Roman de Fauvel (14th c.)</span></span><span class="dn">2&prime;</span></li>
+          <li><span class="no">8</span><span class="pc"><span class="tt">Cosa non &egrave; ch&rsquo;a s&eacute; tanto mi tiri</span><span class="cm">Anonymous (14th c.)</span></span><span class="dn">3&prime;30</span></li>
+          <li><span class="no">9</span><span class="pc"><span class="tt">De ce que fol pense</span><span class="cm">Pierre des Molins (fl. mid-14th c.)</span></span><span class="dn">5&prime;</span></li>
+          <li><span class="no">10</span><span class="pc"><span class="tt">Pluseurs gens voy</span><span class="cm">Solage (fl. 1350&ndash;1403)</span></span><span class="dn">5&prime;</span></li>
+          <li><span class="no">11</span><span class="pc"><span class="tt">O livoris feritas</span><span class="cm">Guillaume de Machaut</span></span><span class="dn">3&prime;</span></li>
+        </ol>
+      </div>
+      <div class="mvt">
+        <h4>III &middot; Towards Light or Madness</h4>
+        <ol>
+          <li><span class="no">12</span><span class="pc"><span class="tt">Es f&uuml;gt sich</span><span class="cm">Oswald von Wolkenstein (c. 1377&ndash;1445)</span></span><span class="dn">7&prime;</span></li>
+          <li><span class="no">13</span><span class="pc"><span class="tt">Una Panthera</span><span class="cm">Johannes Ciconia (c. 1370&ndash;1412)</span></span><span class="dn">5&prime;</span></li>
+          <li><span class="no">14</span><span class="pc"><span class="tt">Kyrie Cunctipotens Genitor Deus</span><span class="cm">Anon., Faenza Codex (15th c.)</span></span><span class="dn">5&prime;</span></li>
+          <li><span class="no">15</span><span class="pc"><span class="tt">Ad mortem festinamus</span><span class="cm">Anon., Llibre Vermell de Montserrat (14th c.)</span></span><span class="dn">4&prime;</span></li>
+          <li><span class="no">16</span><span class="pc"><span class="tt">Stella splendens in monte</span><span class="cm">Anon., Llibre Vermell de Montserrat (14th c.)</span></span><span class="dn">3&prime;</span></li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
