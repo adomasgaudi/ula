@@ -21,7 +21,7 @@
   --oxblood:#9a4039;
   --line:rgba(200,168,92,.20);
   --line-soft:rgba(200,168,92,.10);
-  --photo:url("ula.jpg");
+  --photo:url("basilisk.jpg");
   --serif:"Fraunces",Georgia,serif;
   --body:"EB Garamond",Georgia,serif;
   --ease:cubic-bezier(.22,1,.36,1);
@@ -124,11 +124,11 @@ body.menu-open .burger span:nth-child(3){top:11px;transform:rotate(-45deg)}
 .btn.ghost span{color:var(--cream-dim)}
 .btn.ghost:hover span{color:var(--ink)}
 
-.hero-photo{position:relative;aspect-ratio:1060/1600;max-height:84vh;justify-self:end;width:100%;
+.hero-photo{position:relative;aspect-ratio:1/1;max-height:84vh;justify-self:end;width:100%;
   opacity:0;animation:fadephoto 1.4s var(--ease) .35s forwards}
 .hero-photo .img{
   position:absolute;inset:0;background:var(--photo) center/cover no-repeat;
-  filter:sepia(.34) contrast(1.04) brightness(.92);
+  filter:sepia(.12) contrast(1.05) saturate(1.05);
 }
 .hero-photo::after{
   content:"";position:absolute;inset:0;
@@ -174,11 +174,33 @@ section{position:relative}
 .m h3{font-size:27px;margin:18px 0 6px}
 .m .inst{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 .m p{font-size:16px;color:var(--cream-dim);line-height:1.6}
+.m .mph{position:relative;aspect-ratio:4/5;margin-bottom:24px;overflow:hidden;
+  border:1px solid var(--line)}
+.m .mph img{width:100%;height:100%;object-fit:cover;object-position:center 22%;
+  filter:grayscale(1) sepia(.18) contrast(1.04) brightness(.96);transition:.6s var(--ease)}
+.m:hover .mph img{filter:grayscale(0) sepia(.1) contrast(1.05);transform:scale(1.04)}
+.m .mph::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(15,36,23,0) 60%,rgba(15,36,23,.4));pointer-events:none}
+.m .mph.voice{display:grid;place-items:center;background:var(--ink-2);
+  background-image:radial-gradient(120% 90% at 50% 30%,rgba(200,168,92,.10),transparent 70%)}
+.m .mph.voice span{font-size:54px;color:var(--gold-deep);transition:.6s var(--ease)}
+.m:hover .mph.voice span{color:var(--gold);transform:scale(1.1)}
+.m .mph.voice::after{display:none}
 .m .orn{position:absolute;top:30px;right:26px;color:var(--line);font-size:22px;transition:.5s var(--ease)}
 .m:hover .orn{color:var(--gold);transform:rotate(180deg)}
 
 /* PROGRAMMES */
 .programmes{background:var(--ink-2);border-top:1px solid var(--line-soft)}
+.prog-art{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:64px}
+.prog-art figure{position:relative;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3}
+.prog-art img{width:100%;height:100%;object-fit:cover;transition:.7s var(--ease);
+  filter:contrast(1.04) saturate(1.05) brightness(.96)}
+.prog-art figure:hover img{transform:scale(1.05)}
+.prog-art figure::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(15,36,23,0) 55%,rgba(15,36,23,.5));pointer-events:none}
+.prog-art figcaption{position:absolute;left:18px;bottom:14px;z-index:2;font-size:12px;
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(236,226,207,.82)}
+@media(max-width:760px){.prog-art{grid-template-columns:1fr;gap:16px}}
 .prog{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center;
   padding:38px 0;border-top:1px solid var(--line);cursor:default;transition:.5s var(--ease)}
 .prog:last-child{border-bottom:1px solid var(--line)}
@@ -298,8 +320,9 @@ footer{padding:60px 0 40px;border-top:1px solid var(--line)}
   .gig .date .my{margin-top:0}
   .stats{gap:34px}
   .hero h1{font-size:clamp(48px,14vw,80px)}
-  .hero-photo{display:block;justify-self:stretch;width:100%;max-height:none;
-    aspect-ratio:1060/1340;margin-top:44px}
+  .hero .wrap{display:flex;flex-direction:column}
+  .hero-photo{display:block;order:-1;width:100%;max-height:none;
+    aspect-ratio:1/1;margin:0 0 40px}
 }
 </style>
 </head>
@@ -339,7 +362,7 @@ footer{padding:60px 0 40px;border-top:1px solid var(--line)}
     <div class="hero-photo">
       <div class="img"></div>
       <div class="frame"></div>
-      <div class="cap">Performing at St. Mary&rsquo;s, winter season</div>
+      <div class="cap">Basilisk &middot; Bestiary, c. 13th century</div>
     </div>
   </div>
 </section>
@@ -369,10 +392,10 @@ footer{padding:60px 0 40px;border-top:1px solid var(--line)}
   <div class="wrap">
     <div class="sec-head rv"><span class="num">II</span><h2>The Musicians</h2></div>
     <div class="roster">
-      <div class="m rv"><span class="orn">&#10047;</span><div class="idx">i.</div><h3>Eleanor Vance</h3><div class="inst">Vielle &amp; Gittern</div><p>Specialist in medieval bowed and plucked strings, trained at the Schola Cantorum Basiliensis.</p></div>
-      <div class="m rv d1"><span class="orn">&#10047;</span><div class="idx">ii.</div><h3>Tomas Reid</h3><div class="inst">Recorders &amp; Flutes</div><p>A versatile wind player whose collection spans the soprano recorder to the great bass.</p></div>
-      <div class="m rv d2"><span class="orn">&#10047;</span><div class="idx">iii.</div><h3>Marta Lindqvist</h3><div class="inst">Soprano</div><p>A clear, ornament-rich voice equally suited to plainchant, polyphony and secular song.</p></div>
-      <div class="m rv d3"><span class="orn">&#10047;</span><div class="idx">iv.</div><h3>Cecily Brandt</h3><div class="inst">Gothic &amp; Bray Harp</div><p>Harpist and continuo player drawn to the buzzing timbre of the medieval bray harp.</p></div>
+      <div class="m rv"><span class="orn">&#10047;</span><div class="mph"><img src="musician-kinder.jpg" alt="Ula Kinder with vielle" loading="lazy"></div><div class="idx">i.</div><h3>Ula Kinder</h3><div class="inst">Vielle &amp; Baroque Violin</div><p>A vielle and Baroque violin player performing across the US and Europe — from Boston Early Music Festival to Lucerne, and on Broadway in &lsquo;Farinelli and the King&rsquo;. A graduate of Juilliard and the Royal Academy of Music, now studying with Baptiste Romain at the Schola Cantorum Basiliensis.</p></div>
+      <div class="m rv d1"><span class="orn">&#10047;</span><div class="mph"><img src="musician-scott.jpg" alt="Daniel Scott with recorder" loading="lazy"></div><div class="idx">ii.</div><h3>Daniel Scott</h3><div class="inst">Organetto, Clavicymbalum &amp; Recorder</div><p>A recorder and early-keyboard player specialising in medieval, renaissance and contemporary music. First Prize winner at the Royal Overseas League Competition and founding artistic lead of the UK medieval ensemble Rune, currently reading a masters in early keyboards at the Schola Cantorum Basiliensis.</p></div>
+      <div class="m rv d2"><span class="orn">&#10047;</span><div class="mph"><img src="musician-amici.jpg" alt="Michela Amici with harp" loading="lazy"></div><div class="idx">iii.</div><h3>Michela Amici</h3><div class="inst">Bray &amp; Medieval Harp</div><p>Studied modern and historical harps at the Rossini Conservatory of Pesaro and the Royal Conservatoire of The Hague before a Specialized Master in Historical Harps at the Schola Cantorum Basiliensis. A sought-after continuo player at festivals from the Dutch Harp Festival to Musica Antica Den Haag.</p></div>
+      <div class="m rv d3"><span class="orn">&#10047;</span><div class="mph voice"><span>&#9834;</span></div><div class="idx">iv.</div><h3>Ivana Sofia Ivanović</h3><div class="inst">Voice &amp; Organetto</div><p>A mezzo-soprano trained in Bordeaux, with master&rsquo;s degrees from the Sorbonne and a Master in Medieval and Renaissance vocal performance from the Schola Cantorum Basiliensis. Based in Basel, she founded the professional vocal ensemble KIMA.</p></div>
     </div>
   </div>
 </section>
@@ -381,6 +404,10 @@ footer{padding:60px 0 40px;border-top:1px solid var(--line)}
 <section class="programmes pad" id="programmes">
   <div class="wrap">
     <div class="sec-head rv"><span class="num">III</span><h2>Programmes</h2></div>
+    <div class="prog-art rv">
+      <figure><img src="illum-musicians.jpg" alt="Medieval musicians at play" loading="lazy"><figcaption>Minstrels &middot; medieval manuscript</figcaption></figure>
+      <figure><img src="illum-large.jpg" alt="Illuminated manuscript page" loading="lazy"><figcaption>Illuminated leaf &middot; Mundus Inversus</figcaption></figure>
+    </div>
     <div class="rv">
       <div class="prog"><span class="pn">i</span><div class="pt serif-it">The Garden of Earthly Delight</div><div class="pd">French &amp; Italian song of the Ars Nova — Machaut, Landini and the courtly love lyric.</div></div>
       <div class="prog"><span class="pn">ii</span><div class="pt serif-it">Cantigas de Santa Mar&iacute;a</div><div class="pd">Devotional song and dance from the court of Alfonso X of Castile.</div></div>
